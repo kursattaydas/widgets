@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 Dakika Pomodoro Zamanlayıcı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #timer {
+            font-size: 48px;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>25 Dakika Pomodoro Zamanlayıcı</h1>
+    <div id="timer">25:00</div>
+    <button onclick="startTimer()">Başla</button>
+    <button onclick="stopTimer()">Durdur</button>
+    <button onclick="resetTimer()">Sıfırla</button>
+
+    <script>
+        let timer;
+        let timeLeft = 25 * 60;
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        function startTimer() {
+            if (!timer) {
+                timer = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        alert("Pomodoro süresi doldu!");
+                        timer = null;
+                        timeLeft = 25 * 60; // Sıfırlama
+                    }
+                }, 1000);
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timer = null;
+            timeLeft = 25 * 60;
+            updateDisplay();
+        }
+
+        updateDisplay();
+    </script>
+
+</body>
+</html>
