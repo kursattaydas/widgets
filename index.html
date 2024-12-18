@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>25 Dakika Pomodoro Zamanlayıcı</title>
+    <title>Bağlama Çalışma Zamanlayıcı_K.T.</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,12 +19,32 @@
         }
         #timer {
             font-size: 48px;
+            color: #333; /* Normal durumda sayaç rengi */
+            transition: color 0.3s;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
             margin: 10px;
             cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        #startButton {
+            background-color: #28a745; /* Yeşil */
+            color: white;
+        }
+        #stopButton {
+            background-color: #007bff; /* Mavi */
+            color: white;
+        }
+        #resetButton {
+            background-color: white; /* Beyaz */
+            color: #333;
+            border: 1px solid #ccc;
+        }
+        #startButton.active {
+            background-color: #dc3545; /* Kırmızı */
         }
         .dark-mode {
             background-color: #333;
@@ -34,16 +54,37 @@
             background-color: #555;
             color: #f0f0f0;
         }
+        .dark-mode #resetButton {
+            color: #333;
+            border-color: #555;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        /* Flash Animasyonu */
+        @keyframes flash {
+            0%, 100% { background-color: #f0f0f0; }
+            50% { background-color: #ff0000; }
+        }
+        .flash {
+            animation: flash 0.5s ease-in-out 3;
+        }
     </style>
 </head>
 <body>
 
-    <h1>25 Dakika Pomodoro Zamanlayıcı</h1>
+    <h1>Bağlama Çalışma Zamanlayıcı_K.T.</h1>
     <div id="timer">25:00</div>
-    <button onclick="startTimer()">Başla</button>
-    <button onclick="stopTimer()">Durdur</button>
-    <button onclick="resetTimer()">Sıfırla</button>
+    <button id="startButton" onclick="startTimer()">Başla</button>
+    <button id="stopButton" onclick="stopTimer()">Durdur</button>
+    <button id="resetButton" onclick="resetTimer()">Sıfırla</button>
     <button onclick="toggleDarkMode()">Koyu Mod</button>
+    <footer>Etütlerinizi ve eserlerinizi çalışırken kullanabilirsiniz.</footer>
+
+    <!-- Ses Efekti -->
+    <audio id="endSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
 
     <script>
         let timer;
@@ -56,12 +97,17 @@
         }
 
         function startTimer() {
+            const startButton = document.getElementById('startButton');
+            startButton.classList.remove('active');
             if (!timer) {
                 timer = setInterval(() => {
                     timeLeft--;
                     updateDisplay();
                     if (timeLeft <= 0) {
                         clearInterval(timer);
+                        playSoundAndFlash();
+                        startButton.classList.add('active'); // Süre sonunda başla butonu kırmızı
+                        document.getElementById('timer').style.color = "#dc3545"; // Süre sonunda sayaç kırmızı
                         alert("Pomodoro süresi doldu!");
                         timer = null;
                         timeLeft = 25 * 60; // Sıfırlama
@@ -79,11 +125,24 @@
             clearInterval(timer);
             timer = null;
             timeLeft = 25 * 60;
+            document.getElementById('startButton').classList.remove('active'); // Renk eski haline döner
+            document.getElementById('timer').style.color = "#333"; // Sayaç rengi eski haline döner
             updateDisplay();
         }
 
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
+        }
+
+        function playSoundAndFlash() {
+            const sound = document.getElementById('endSound');
+            sound.play();
+
+            // Yanıp sönme efekti
+            document.body.classList.add('flash');
+            setTimeout(() => {
+                document.body.classList.remove('flash');
+            }, 1500); // 3 kez yanıp söndüğü için animasyon süresi 1.5 saniye
         }
 
         updateDisplay();
