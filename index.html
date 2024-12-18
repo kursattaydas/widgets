@@ -13,16 +13,26 @@
             justify-content: center;
             height: 100vh;
             background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
         #timer {
             font-size: 48px;
-            color: #333;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
             margin: 10px;
             cursor: pointer;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+        .dark-mode button {
+            background-color: #555;
+            color: #f0f0f0;
         }
     </style>
 </head>
@@ -33,6 +43,7 @@
     <button onclick="startTimer()">Başla</button>
     <button onclick="stopTimer()">Durdur</button>
     <button onclick="resetTimer()">Sıfırla</button>
+    <button onclick="toggleDarkMode()">Koyu Mod</button>
 
     <script>
         let timer;
@@ -69,6 +80,10 @@
             timer = null;
             timeLeft = 25 * 60;
             updateDisplay();
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
         }
 
         updateDisplay();
