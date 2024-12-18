@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Günlük Söz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .quote-box {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .quote-text {
+            font-size: 24px;
+            font-style: italic;
+        }
+        .quote-author {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-box">
+        <p id="quote" class="quote-text">Yükleniyor...</p>
+        <p id="author" class="quote-author"></p>
+    </div>
+
+    <script>
+        const quotes = [
+            { text: "Hayatta en zor şey, insanın kendi içini tanımasıdır.", author: "Arthur Schopenhauer" },
+            { text: "İnsan, hayatını sadece bir an için yaşamaz; geçmişi ve geleceği de onun bir parçasıdır.", author: "Arthur Schopenhauer" },
+            { text: "Sanat, insanın içsel dünyasına açılan bir penceredir.", author: "Edgar Allan Poe" },
+            { text: "Müzik, evrensel bir dil olup, ruhu doğrudan etkileyen tek sanattır.", author: "Ludwig van Beethoven" },
+            { text: "Sanat, insanın kendini ifade etme biçimidir.", author: "Pablo Picasso" },
+            { text: "Bir müzik eseri, duyguları ifade etmek için kelimelerden daha güçlüdür.", author: "Claude Debussy" },
+            { text: "Sanat, insanın içindeki kaosu dışa vurmasıdır.", author: "Vincent van Gogh" },
+            { text: "Müzik ruhun gıdasıdır.", author: "Plato" },
+            { text: "Her şeyin en güzelini bekleme; çünkü her şeyin en güzelini yaşamadan anlayamazsın.", author: "Friedrich Nietzsche" },
+            { text: "Sanat, gerçeklikten daha gerçektir.", author: "Oscar Wilde" },
+            { text: "Bir sanatçı, dünyayı farklı bir şekilde görme yeteneğine sahip olandır.", author: "Henri Matisse" },
+            { text: "Güzel bir şarkı, bir anı ölümsüzleştirir.", author: "Bob Dylan" },
+            { text: "Müzik, insanın içindeki en derin duyguları ortaya çıkarır.", author: "Johann Sebastian Bach" },
+            { text: "Bir sanat eseri, insanın zihin ve ruhunu geliştiren bir güce sahiptir.", author: "Johann Wolfgang von Goethe" },
+            { text: "Sanatın amacı, insan ruhunu özgürleştirmektir.", author: "William Shakespeare" },
+            { text: "Müzik, evrende insanın anladığı en yüksek dilin kendisidir.", author: "Claude Monet" },
+            { text: "Sanat, bir yansıma değil, bir yaratım sürecidir.", author: "Leonardo da Vinci" },
+            { text: "Her bir insan, hayatını bir sanat eseri olarak yaratmalıdır.", author: "Kurt Cobain" },
+            { text: "Bir sanatçı, sadece dış dünyayı değil, iç dünyayı da gösterir.", author: "Frida Kahlo" },
+            { text: "Bir resim, bir düşünceden daha derindir.", author: "Pablo Picasso" },
+            { text: "Müzik, ruhun derinliklerine iner ve insanın içindeki tüm duyguları açığa çıkarır.", author: "Arthur Schopenhauer" },
+            { text: "Sanat, bir toplumun vicdanıdır.", author: "Gustave Courbet" },
+            { text: "Müzik, aşk gibi özgürdür ve hiçbir engel tanımaz.", author: "Frederic Chopin" },
+            { text: "Sanat, acıyı anlamak ve onunla barış yapmaktır.", author: "Franz Kafka" },
+            { text: "Hayat bir sanat eseridir; bu eseri en güzel şekilde yaratmak senin elindedir.", author: "Mahatma Gandhi" },
+            { text: "Sanat, kendini başkalarına aktarabilme gücüdür.", author: "Henri Toulouse-Lautrec" },
+            { text: "Sanat, yaşamın sesidir.", author: "Clyde Tombaugh" },
+            { text: "Sanatın değeri, ona verdikleri anlamla ölçülür.", author: "Mark Rothko" },
+            { text: "Bir insan, bir şarkı kadar ruhsal derinlikte olabilir.", author: "Bob Marley" },
+            { text: "Gerçek sanatçı, toplumun ideallerinin ötesine geçebilen kişidir.", author: "Johann Wolfgang von Goethe" },
+            { text: "Sanat, dünyanın doğru şekilde anlaşılmasıdır.", author: "Edvard Munch" }
+        ];
+
+        // Günün sözünü seç
+        const todayQuote = quotes[new Date().getDate() % quotes.length];
+
+        // Söz ve yazarı ekle
+        document.getElementById('quote').innerText = todayQuote.text;
+        document.getElementById('author').innerText = `- ${todayQuote.author}`;
+    </script>
+</body>
+</html>
